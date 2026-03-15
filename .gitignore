@@ -1,0 +1,22 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.so
+
+# Telethon session files
+*.session
+*.session-journal
+
+# Python tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# OS/editor files
+.DS_Store
+.idea/
+.vscode/

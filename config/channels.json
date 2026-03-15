@@ -1,0 +1,14 @@
+{
+  "channels": [
+    {
+      "tg_channel": "@ZeRada1",
+      "source_title": "ЗеРада",
+      "vk_peer_id": 2000000001
+    },
+    {
+      "tg_channel": "@bloodysx",
+      "source_title": "Кровавая барыня",
+      "vk_peer_id": 2000000002
+    }
+  ]
+}
