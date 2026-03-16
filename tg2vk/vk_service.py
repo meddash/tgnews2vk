@@ -53,6 +53,7 @@ class VKService:
             {
                 "photo": uploaded["photo"],
                 "server": uploaded["server"],
+                "hash": uploaded["hash"],
             },
         )
 

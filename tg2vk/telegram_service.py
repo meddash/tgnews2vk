@@ -18,6 +18,7 @@ class IncomingPost:
     vk_peer_id: int
     text: str
     photo_bytes: bytes | None
+    has_unsupported_video: bool
 
 
 PostHandler = Callable[[IncomingPost], Awaitable[None]]
@@ -80,6 +81,20 @@ class TelegramService:
                 photo_bytes = await message.download_media(file=bytes)
             except Exception:
                 self.logger.exception("Failed to download photo from Telegram message")
+        elif message.file and (message.file.mime_type or "").startswith("image/"):
+            try:
+                # Some Telegram channels send images as documents instead of photo objects.
+                photo_bytes = await message.download_media(file=bytes)
+            except Exception:
+                self.logger.exception("Failed to download image document from Telegram message")
+
+        has_unsupported_video = False
+        if message.video or (message.file and (message.file.mime_type or "").startswith("video/")):
+            has_unsupported_video = True
+            self.logger.info(
+                "Video attachment detected in Telegram channel %s, but VK video forwarding is not implemented yet",
+                full_channel_id,
+            )
 
         incoming_post = IncomingPost(
             channel_id=full_channel_id,
@@ -87,6 +102,7 @@ class TelegramService:
             vk_peer_id=vk_peer_id,
             text=text,
             photo_bytes=photo_bytes,
+            has_unsupported_video=has_unsupported_video,
         )
 
         try:

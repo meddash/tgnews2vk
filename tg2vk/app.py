@@ -33,7 +33,13 @@ class RepostApp:
 
     async def handle_post(self, post: IncomingPost) -> None:
         if not post.text and not post.photo_bytes:
-            self.logger.info("Skipped empty Telegram post from %s", post.channel_title)
+            if post.has_unsupported_video:
+                self.logger.info(
+                    "Skipped Telegram post from %s because it contains only unsupported video media",
+                    post.channel_title,
+                )
+            else:
+                self.logger.info("Skipped empty Telegram post from %s", post.channel_title)
             return
 
         if not post.text and post.photo_bytes:
