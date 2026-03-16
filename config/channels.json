@@ -14,6 +14,16 @@
       "tg_channel": "@bbbreaking",
       "source_title": "Раньше всех, ну почти",
       "vk_peer_id": 2000000003
+    },
+    {
+      "tg_channel": "@victorstepanych",
+      "source_title": "Winwin",
+      "vk_peer_id": 2000000004
+    },
+    {
+      "tg_channel": "@russicaRU",
+      "source_title": "нзгр",
+      "vk_peer_id": 2000000005
     }
   ]
 }
